@@ -1,11 +1,16 @@
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useState } from 'react';
 import './Album.scss';
 
 function Album({
   image, name, artist, album, year, genre, like,
 }) {
-  const likeStyle = like ? 'fa-solid' : 'fa-regular';
+  const [iLike, setILike] = useState(like);
+  const likeStyle = iLike ? 'fa-solid' : 'fa-regular';
+
+  const handleLikeClick = () => {
+    setILike((current) => !current);
+  };
 
   return (
     <section className="album">
@@ -34,12 +39,14 @@ function Album({
             )
           </p>
         </section>
-        <section className="album__bottom">
-          <div className="album__genre">
+        <section className="song__bottom">
+          <div className="song__genre">
             {genre}
           </div>
-          <div className="album__like">
-            <i className={`fa-heart ${likeStyle}`} />
+          <div className="song__like">
+            <button type="button" className="song__like-button" onClick={handleLikeClick}>
+              <i className={`fa-heart ${likeStyle}`} />
+            </button>
           </div>
         </section>
       </section>
